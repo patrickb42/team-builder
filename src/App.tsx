@@ -5,11 +5,11 @@ import './App.css';
 import Form from './components/Form';
 
 const App: React.FC = () => {
-  const [placeholdState, setPlaceholderState] = useState<TeamMemberTS[]>();
+  const [membersList, setMembersList] = useState<TeamMemberTS[]>([]);
 
   return (
     <Router>
-      <Form />
+      <Form setMembersList={setMembersList}/>
     </Router>
   );
 };

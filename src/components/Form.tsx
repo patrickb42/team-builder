@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 interface FormProps {
   setMembersList: React.Dispatch<React.SetStateAction<TeamMemberTS[]>> | undefined;
 }
-const Form: React.FC = (props) => {
+const Form = ({ setMembersList }: FormProps) => {
   const [teamMemberFormData, setTeamMemberFormData] = useState<TeamMemberTS>({
     name: '',
     email: '',
@@ -13,7 +13,10 @@ const Form: React.FC = (props) => {
 
   const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setMembersList && setMembersList((membersList) => {
+      return [...membersList, teamMemberFormData];
+    });
+    setTeamMemberFormData({ name: '', email: '', role: '' });
   };
   const updateTeamMemberData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTeamMemberFormData({

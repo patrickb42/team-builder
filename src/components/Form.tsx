@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 
 interface FormProps {
-  setRoster: React.Dispatch<React.SetStateAction<RosterTS>>;
+  // setRoster: React.Dispatch<React.SetStateAction<RosterTS>>;
+  setRoster: any;
 }
 const Form = ({ setRoster }: FormProps) => {
-  const [teamMemberFormData, setTeamMemberFormData] = useState<TeamMemberTS>({
+  const [teamMember, setTeamMember] = useState<TeamMemberTS>({
     name: '',
     email: '',
     role: '',
     team: '',
   });
-  const { name, email, role, team } = teamMemberFormData;
+  const { name, email, role, team } = teamMember;
 
   const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setRoster((roster) => {
-      return { ...roster, [team]: [...(roster[team]), teamMemberFormData] };
+    setRoster((roster: any) => {
+      const currentTeam = roster[team] || [];
+      const updatedTeam = [...currentTeam, teamMember];
+      return { ...roster, [team]: updatedTeam };
     });
-    setTeamMemberFormData({ name: '', email: '', role: '', team: '' });
+    setTeamMember({ name: '', email: '', role: '', team: '' });
   };
   const updateTeamMemberData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTeamMemberFormData({
-      ...teamMemberFormData,
+    setTeamMember({
+      ...teamMember,
       [e.currentTarget.name]: e.currentTarget.value,
     } as TeamMemberTS);
   };
@@ -55,7 +58,7 @@ const Form = ({ setRoster }: FormProps) => {
       <input name="team"
         type="text"
         placeholder="Jacob"
-        value={role}
+        value={team}
         onChange={updateTeamMemberData}
       />&nbsp;
       <button type="submit">submit</button>

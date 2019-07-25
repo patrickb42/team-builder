@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 import Form from './components/Form';
+import Roster from './components/Roster';
 
 const App: React.FC = () => {
-  // const [membersList, setMembersList] = useState<TeamMemberTS[]>([]);
   const [roster, setRoster] = useState<RosterTS>({});
 
   return (
     <Router>
-      {/* <Form setMembersList={setMembersList}/> */}
       <Form setRoster={setRoster}/>
+      <Roster roster={roster}/>
     </Router>
   );
 };

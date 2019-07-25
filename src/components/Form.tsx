@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 
 interface FormProps {
-  // setRoster: React.Dispatch<React.SetStateAction<RosterTS>>;
-  setRoster: any;
+  setRoster: React.Dispatch<React.SetStateAction<RosterTS>>;
+  memberToEdit: TeamMemberTS | undefined;
 }
-const Form = ({ setRoster }: FormProps) => {
-  const [teamMember, setTeamMember] = useState<TeamMemberTS>({
+const Form = ({ setRoster, memberToEdit }: FormProps) => {
+  const [teamMember, setTeamMember] = useState<TeamMemberTS>(memberToEdit || {
     name: '',
     email: '',
     role: '',
     team: '',
   });
   const { name, email, role, team } = teamMember;
+  const submitText = memberToEdit === undefined ? 'submit' : 'update';
 
   const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setRoster((roster: any) => {
+    setRoster((roster) => {
       const currentTeam = roster[team] || [];
       const updatedTeam = [...currentTeam, teamMember];
       return { ...roster, [team]: updatedTeam };
@@ -61,7 +62,7 @@ const Form = ({ setRoster }: FormProps) => {
         value={team}
         onChange={updateTeamMemberData}
       />&nbsp;
-      <button type="submit">submit</button>
+      <button type="submit">{submitText}</button>
     </form>
   );
 };

@@ -7,11 +7,12 @@ import Roster from './components/Roster';
 
 const App: React.FC = () => {
   const [roster, setRoster] = useState<RosterTS>({});
+  const [memberToEdit, setMemberToEdit] = useState<TeamMemberTS | undefined>();
 
-  return (
+  return ( 
     <Router>
-      <Form setRoster={setRoster}/>
-      <Roster roster={roster}/>
+      <Form setRoster={setRoster} memberToEdit={memberToEdit}/>
+      <Roster roster={roster} />
     </Router>
   );
 };

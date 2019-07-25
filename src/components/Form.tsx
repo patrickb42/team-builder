@@ -8,15 +8,16 @@ const Form = ({ setMembersList }: FormProps) => {
     name: '',
     email: '',
     role: '',
+    team: '',
   });
-  const { name, email, role } = teamMemberFormData;
+  const { name, email, role, team } = teamMemberFormData;
 
   const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMembersList && setMembersList((membersList) => {
       return [...membersList, teamMemberFormData];
     });
-    setTeamMemberFormData({ name: '', email: '', role: '' });
+    setTeamMemberFormData({ name: '', email: '', role: '', team: '' });
   };
   const updateTeamMemberData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTeamMemberFormData({
@@ -47,6 +48,12 @@ const Form = ({ setMembersList }: FormProps) => {
       <input name="role"
         type="text"
         placeholder="Software Developer"
+        value={role}
+        onChange={updateTeamMemberData}
+      />&nbsp;
+      <input name="team"
+        type="text"
+        placeholder="Jacob"
         value={role}
         onChange={updateTeamMemberData}
       />&nbsp;

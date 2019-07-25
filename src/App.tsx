@@ -6,10 +6,12 @@ import Form from './components/Form';
 
 const App: React.FC = () => {
   const [membersList, setMembersList] = useState<TeamMemberTS[]>([]);
+  // const [roster, setRoster] = useState<Roster>({});
 
   return (
     <Router>
       <Form setMembersList={setMembersList}/>
+      {/* <Form setMembersList={setRoster}/> */}
     </Router>
   );
 };

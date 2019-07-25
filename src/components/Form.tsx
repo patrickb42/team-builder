@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-};
-
+import React, { useState } from 'react';
 
 interface FormProps {
-  membersList: TeamMemberTS[] | undefined;
   setMembersList: React.Dispatch<React.SetStateAction<TeamMemberTS[]>> | undefined;
 }
-const Form: React.FC = () => {
-  const [teamMemberFormData, setTeamMemberFormData] = useState<TeamMemberTS | undefined>(undefined);
+const Form: React.FC = (props) => {
+  const [teamMemberFormData, setTeamMemberFormData] = useState<TeamMemberTS>({
+    name: '',
+    email: '',
+    role: '',
+  });
+  const { name, email, role } = teamMemberFormData;
 
+  const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+  };
   const updateTeamMemberData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTeamMemberFormData({
       ...teamMemberFormData,
-      [e.currentTarget.name]: e.currentTarget.value
+      [e.currentTarget.name]: e.currentTarget.value,
     } as TeamMemberTS);
   };
 
@@ -27,21 +29,24 @@ const Form: React.FC = () => {
         name="name"
         type="text"
         placeholder="Taylor Smith"
+        value={name}
         onChange={updateTeamMemberData}
-        /><br/>
+      />&nbsp;
       Email:&nbsp;
       <input
         name="email"
-        type="text"
+        type="email"
         placeholder="TaylorSmith@gmail.com"
+        value={email}
         onChange={updateTeamMemberData}
-        /><br/>
+      />&nbsp;
       Role:&nbsp;
       <input name="role"
         type="text"
         placeholder="Software Developer"
+        value={role}
         onChange={updateTeamMemberData}
-      /><br/>
+      />&nbsp;
       <button type="submit">submit</button>
     </form>
   );

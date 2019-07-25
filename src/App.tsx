@@ -5,13 +5,13 @@ import './App.css';
 import Form from './components/Form';
 
 const App: React.FC = () => {
-  const [membersList, setMembersList] = useState<TeamMemberTS[]>([]);
-  // const [roster, setRoster] = useState<Roster>({});
+  // const [membersList, setMembersList] = useState<TeamMemberTS[]>([]);
+  const [roster, setRoster] = useState<RosterTS>({});
 
   return (
     <Router>
-      <Form setMembersList={setMembersList}/>
-      {/* <Form setMembersList={setRoster}/> */}
+      {/* <Form setMembersList={setMembersList}/> */}
+      <Form setRoster={setRoster}/>
     </Router>
   );
 };

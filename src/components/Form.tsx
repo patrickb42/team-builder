@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 interface FormProps {
-  setMembersList: React.Dispatch<React.SetStateAction<TeamMemberTS[]>> | undefined;
+  setRoster: React.Dispatch<React.SetStateAction<RosterTS>>;
 }
-const Form = ({ setMembersList }: FormProps) => {
+const Form = ({ setRoster }: FormProps) => {
   const [teamMemberFormData, setTeamMemberFormData] = useState<TeamMemberTS>({
     name: '',
     email: '',
@@ -14,8 +14,8 @@ const Form = ({ setMembersList }: FormProps) => {
 
   const submitMember = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMembersList && setMembersList((membersList) => {
-      return [...membersList, teamMemberFormData];
+    setRoster((roster) => {
+      return { ...roster, [team]: [...(roster[team]), teamMemberFormData] };
     });
     setTeamMemberFormData({ name: '', email: '', role: '', team: '' });
   };
@@ -51,6 +51,7 @@ const Form = ({ setMembersList }: FormProps) => {
         value={role}
         onChange={updateTeamMemberData}
       />&nbsp;
+      Team:&nbsp;
       <input name="team"
         type="text"
         placeholder="Jacob"

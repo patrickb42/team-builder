@@ -1,3 +1,3 @@
-interface Roster {
-  [x: string]: TeamMemberTS;
+interface RosterTS {
+  [x: string]: TeamMemberTS[];
 }
